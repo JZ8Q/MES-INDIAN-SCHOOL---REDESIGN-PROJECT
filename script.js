@@ -23,17 +23,23 @@ window.addEventListener("load", () => {
             progress.style.width = "100%";
 
             setTimeout(() => {
-                homePage.style.display = "block";
-                document.body.style.overflow = "auto";
-                document.body.style.background = "white";
 
-                requestAnimationFrame(() => {
-                    homePage.classList.add("show");
-                    loader.classList.add("exit");
-                });
+                // Start loader exit animation
+                loader.classList.add("exit");
 
+                // Wait until loader has completely disappeared
                 setTimeout(() => {
                     loader.style.display = "none";
+
+                    // Now reveal the homepage
+                    homePage.style.display = "block";
+                    document.body.style.overflow = "auto";
+                    document.body.style.background = "white";
+
+                    requestAnimationFrame(() => {
+                        homePage.classList.add("show");
+                    });
+
                 }, 800);
 
             }, 300);
