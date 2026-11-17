@@ -23,18 +23,15 @@ window.addEventListener("load", () => {
             progress.style.width = "100%";
 
             setTimeout(() => {
-
-                // Start loader exit animation
                 loader.classList.add("exit");
 
-                // Wait until loader has completely disappeared
                 setTimeout(() => {
                     loader.style.display = "none";
 
-                    // Now reveal the homepage
                     homePage.style.display = "block";
-                    document.body.style.overflow = "auto";
-                    document.body.style.background = "white";
+                    document.body.style.overflowY = "auto";
+                    document.body.style.overflowX = "hidden";
+                    document.body.style.background = "#02091b";
 
                     requestAnimationFrame(() => {
                         homePage.classList.add("show");
@@ -48,3 +45,38 @@ window.addEventListener("load", () => {
 
     requestAnimationFrame(animate);
 });
+
+
+/* ================= HOMEPAGE SLIDESHOW ================= */
+
+const backgroundImages = [
+    "assets/slide1.jpg",
+    "assets/slide2.jpg"
+];
+
+let currentImage = 0;
+
+const homepage = document.getElementById("Home-Page");
+
+// Preload the slideshow images
+backgroundImages.forEach(src => {
+    const img = new Image();
+    img.src = src;
+});
+
+function changeBackground() {
+    currentImage = (currentImage + 1) % backgroundImages.length;
+
+    // Change ONLY the image variable.
+    // The navy gradient remains untouched.
+    homepage.style.setProperty(
+        "--hero-slide",
+        `url("${backgroundImages[currentImage]}")`
+    );
+}
+
+setInterval(() => {
+    if (homepage && homepage.classList.contains("show")) {
+        changeBackground();
+    }
+}, 5000);

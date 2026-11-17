@@ -8,8 +8,7 @@
 
 <link rel="shortcut icon" href="assets/anniversary-logo.png" type="image/x-icon">
 
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Great+Vibes&family=Montserrat:wght@400;500;600;700&display=swap');
@@ -26,12 +25,13 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
 
 html, body {
   width: 100%;
-  height: 100%;
+  min-height: 100%;
   margin: 0;
 }
 
 body {
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
   background: var(--navy);
   color: #fff;
 }
@@ -45,7 +45,6 @@ body {
   min-height: 420px;
   overflow: hidden;
   isolation: isolate;
-
   background:
     radial-gradient(ellipse at 75% 42%, rgba(32,42,66,.48), transparent 48%),
     linear-gradient(110deg, #020817 0%, #030b1e 55%, #071027 100%);
@@ -57,11 +56,9 @@ body {
   top: 0%;
   width: 39%;
   height: 100%;
-
   background: url("assets/school-building.jpg") center/cover no-repeat;
   opacity: .47;
   filter: grayscale(1) brightness(.55) contrast(1.08);
-
   -webkit-mask-image: linear-gradient(to left, #000 45%, transparent 100%);
   mask-image: linear-gradient(to left, #000 45%, transparent 100%);
 }
@@ -70,7 +67,6 @@ body {
   position: absolute;
   inset: 0;
   z-index: 1;
-
   background:
     linear-gradient(90deg, rgba(2,8,23,.96) 0%, rgba(2,8,23,.72) 49%, rgba(2,8,23,.18) 100%),
     linear-gradient(0deg, rgba(2,8,23,.78), transparent 38%);
@@ -90,7 +86,6 @@ body {
   z-index: 3;
   left: 2.4%;
   top: 23%;
-
   color: rgba(198,157,94,.075);
   font-family: Georgia, serif;
   font-size: clamp(170px, 25vw, 390px);
@@ -104,7 +99,6 @@ body {
   z-index: 3;
   left: 6.2%;
   top: 56%;
-
   color: rgba(190,145,93,.20);
   font: clamp(30px,4.6vw,66px) "Great Vibes", cursive;
   white-space: nowrap;
@@ -116,10 +110,8 @@ body {
   z-index: 4;
   left: 50%;
   top: 49%;
-
   transform: translate(-50%,-50%);
   width: min(620px, 58vw);
-
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -149,7 +141,6 @@ body {
   display: flex;
   align-items: center;
   gap: 14px;
-
   color: #f8c744;
   font: 600 clamp(11px,1.35vw,19px) Montserrat,sans-serif;
   letter-spacing: .48em;
@@ -175,11 +166,9 @@ body {
   z-index: 5;
   left: 50%;
   bottom: 19.4%;
-
   transform: translateX(-50%);
   width: min(410px,35vw);
   text-align: center;
-
   font: 500 19px Montserrat,sans-serif;
   color: #f4f3f5;
 }
@@ -197,7 +186,6 @@ body {
   height: 100%;
   width: 0%;
   border-radius: 10px;
-
   background: linear-gradient(90deg,#e9a92b,#ffe16a);
   box-shadow: 0 0 12px 2px rgba(255,190,48,.7);
 }
@@ -206,11 +194,38 @@ body {
 
 #Home-Page {
   display: none;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
   min-height: 100vh;
   width: 100%;
-  background: var(--navy);
-  color: #fff;
 
+  /* Background image controlled by script.js */
+  background-color: #02091b;
+
+  background-image:
+    linear-gradient(
+      90deg,
+      rgba(2,9,27,1) 0%,
+      rgba(2,9,27,.98) 15%,
+      rgba(2,9,27,.91) 30%,
+      rgba(2,9,27,.72) 45%,
+      rgba(2,9,27,.38) 65%,
+      rgba(2,9,27,.12) 100%
+    ),
+    linear-gradient(
+      0deg,
+      rgba(2,9,27,.48) 0%,
+      rgba(2,9,27,.12) 45%,
+      rgba(2,9,27,.20) 100%
+    ),
+    var(--hero-slide, url("assets/slide1.jpg"));
+
+  background-position: center, center, center;
+  background-size: cover, cover, cover;
+  background-repeat: no-repeat, no-repeat, no-repeat;
+
+  color: #fff;
   opacity: 0;
   transform: translateY(20px);
   transition: opacity .9s ease, transform .9s ease;
@@ -221,18 +236,33 @@ body {
   transform: translateY(0);
 }
 
+/* ================= HOMEPAGE RED CORNER DESIGNS ================= */
+
+.homepage-curves {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
 /* ================= TOP BAR ================= */
+
+.top-bar,
+.main-nav {
+  position: relative;
+  z-index: 2;
+}
 
 .top-bar {
   position: relative;
   width: 100%;
   height: 43px;
   padding: 0 6.6%;
-
   display: flex;
   align-items: center;
   justify-content: space-between;
-
   background: transparent;
   font-family: 'Montserrat', sans-serif;
   font-size: 11px;
@@ -260,7 +290,6 @@ body {
   display: flex;
   align-items: center;
   gap: 10px;
-
   color: #fff;
   text-decoration: none;
   white-space: nowrap;
@@ -339,13 +368,11 @@ body {
   width: 100%;
   min-height: 100px;
   padding: 0 6.6%;
-
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 30px;
-
-  background: var(--navy);
+  background: transparent;
   font-family: 'Montserrat', sans-serif;
 }
 
@@ -427,7 +454,6 @@ body {
   height: 35px;
   min-width: 64px;
   padding: 0 15px;
-
   color: var(--gold);
   border: 1.5px solid #eeb52c;
   border-radius: 25px;
@@ -440,13 +466,11 @@ body {
   width: 42px;
   height: 42px;
   flex-shrink: 0;
-
   border: 1px solid rgba(255,255,255,.25);
   border-radius: 50%;
   color: #fff;
   font-size: 15px;
   margin-left: 8px;
-
   background: rgba(255,255,255,.035);
   box-shadow: 0 0 8px rgba(255,255,255,.04);
 }
@@ -463,10 +487,8 @@ body {
   padding: 0 18px;
   gap: 8px;
   flex-shrink: 0;
-
   border: 1px solid #c51d48;
   border-radius: 25px;
-
   color: #fff;
   background: linear-gradient(110deg, #a20b35, #65001e);
   box-shadow: 0 3px 12px rgba(105,0,31,.25);
@@ -485,7 +507,6 @@ body {
 /* ================= DESKTOP NAVBAR ALIGNMENT ================= */
 
 @media (min-width: 1101px) {
-
   .main-nav {
     justify-content: flex-start;
     gap: 0;
@@ -506,7 +527,6 @@ body {
     gap: 50px;
   }
 
-  /* Push Search and Login together to the far right */
   .nav-links .nav-search {
     margin-left: auto;
   }
@@ -518,13 +538,129 @@ body {
   .nav-school strong {
     font-size: 25px;
   }
+}
 
+/* ================= HERO TEXT AREA ================= */
+
+.hero-section {
+  position: relative;
+  z-index: 1;
+  min-height: calc(100vh - 143px);
+  display: flex;
+  align-items: center;
+  padding: 30px 8.5% 85px;
+}
+
+.hero-content {
+  width: 100%;
+  max-width: 720px;
+}
+
+.hero-overline {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  color: var(--gold);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+.hero-overline::before {
+  content: "";
+  width: 42px;
+  height: 2px;
+  background: var(--gold);
+}
+
+.hero-content h1 {
+  margin: 0;
+  color: #fff;
+  font-family: 'Montserrat', sans-serif;
+  font-size: clamp(55px, 6.2vw, 92px);
+  font-weight: 900;
+  line-height: .95;
+  letter-spacing: -3px;
+  text-shadow: 0 4px 20px rgba(0,0,0,.25);
+}
+
+.hero-content h1 span {
+  display: block;
+  color: var(--gold);
+  white-space: nowrap;
+}
+
+.hero-tagline {
+  margin-top: 24px;
+  color: #fff;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: 3px;
+}
+
+.hero-description {
+  max-width: 540px;
+  margin-top: 17px;
+  color: rgba(255,255,255,.78);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.9;
+}
+
+.hero-buttons {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-top: 32px;
+}
+
+.hero-btn {
+  min-height: 49px;
+  padding: 0 25px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  border-radius: 30px;
+  text-decoration: none;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .5px;
+  transition: .3s ease;
+}
+
+.hero-btn-primary {
+  color: #15101a;
+  background: linear-gradient(110deg, #ffe17b, #e6a928);
+  border: 1px solid #f8c744;
+}
+
+.hero-btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 22px rgba(248,199,68,.25);
+}
+
+.hero-btn-secondary {
+  color: #fff;
+  border: 1px solid rgba(255,255,255,.55);
+  background: rgba(255,255,255,.06);
+}
+
+.hero-btn-secondary:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+  transform: translateY(-3px);
 }
 
 /* ================= TABLET ================= */
 
 @media (max-width: 1100px) {
-
   .main-nav {
     padding: 15px 3%;
     flex-wrap: wrap;
@@ -541,7 +677,6 @@ body {
 /* ================= MOBILE ================= */
 
 @media (max-width: 700px) {
-
   .loader {
     width: 100%;
     height: 100svh;
@@ -681,6 +816,48 @@ body {
   .nav-links .nav-login {
     padding: 9px 12px;
   }
+
+  /* MOBILE HERO */
+
+  .hero-section {
+    min-height: 75vh;
+    padding: 55px 25px 80px;
+    align-items: center;
+  }
+
+  .hero-content {
+    max-width: 100%;
+  }
+
+  .hero-overline {
+    font-size: 10px;
+    letter-spacing: 2.5px;
+  }
+
+  .hero-content h1 {
+    font-size: clamp(43px, 12vw, 65px);
+  }
+
+  .hero-tagline {
+    font-size: 12px;
+    letter-spacing: 2px;
+  }
+
+  .hero-description {
+    font-size: 12px;
+    line-height: 1.8;
+  }
+
+  .hero-buttons {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .hero-btn {
+    min-height: 44px;
+    padding: 0 18px;
+    font-size: 10px;
+  }
 }
 
 </style>
@@ -699,7 +876,6 @@ body {
   <div class="watermark-script">Years of Excellence</div>
 
   <svg class="curves" viewBox="0 0 1672 941" preserveAspectRatio="none" aria-hidden="true">
-
     <defs>
       <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
         <stop offset="0" stop-color="#ffe77a"/>
@@ -727,27 +903,19 @@ body {
 
     <path d="M0 941C102 827 250 746 440 687" fill="none" stroke="#a87935" stroke-opacity=".17" stroke-width="1"/>
     <path d="M0 912C122 811 255 748 405 700" fill="none" stroke="#a87935" stroke-opacity=".12" stroke-width="1"/>
-
   </svg>
 
   <section class="center">
-
     <img class="emblem" src="assets/anniversary-logo.png" alt="50th anniversary emblem">
-
     <div class="school-name">M.E.S INDIAN SCHOOL</div>
-
     <div class="motto">LEARN • LEAD • EXCEL</div>
-
   </section>
 
   <div class="loading">
-
     <div class="track">
       <div class="progress"></div>
     </div>
-
     <span>Loading...</span>
-
   </div>
 
 </main>
@@ -755,6 +923,49 @@ body {
 <!-- ================= HOMEPAGE ================= -->
 
 <div id="Home-Page">
+
+  <!-- RED DECORATIVE CORNER DESIGNS -->
+
+  <svg class="homepage-curves"
+       viewBox="0 0 1672 941"
+       preserveAspectRatio="none"
+       aria-hidden="true">
+
+    <defs>
+      <linearGradient id="homeRed" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#850020"/>
+        <stop offset="1" stop-color="#260014"/>
+      </linearGradient>
+    </defs>
+
+    <!-- TOP LEFT CORNER -->
+
+    <path d="M0 0H165L0 165Z" fill="url(#homeRed)"/>
+
+    <path d="M0 0H225C145 49 70 111 0 246Z"
+          fill="#310018" opacity=".85"/>
+
+    <path d="M0 0H163C99 50 46 104 0 160"
+          fill="none" stroke="#a30b35" stroke-width="2"/>
+
+    <path d="M0 284C75 166 180 69 316 28C392 5 470 0 540 0"
+          fill="none" stroke="#850020" stroke-width="2"/>
+
+    <!-- BOTTOM RIGHT CORNER -->
+
+    <path d="M1672 632V941H1320C1474 893 1594 788 1672 632Z"
+          fill="url(#homeRed)"/>
+
+    <path d="M1672 632C1595 789 1474 892 1320 914C1454 904 1570 856 1672 789Z"
+          fill="#430019" opacity=".9"/>
+
+    <path d="M1672 632C1595 789 1474 892 1320 914"
+          fill="none" stroke="#a30b35" stroke-width="3"/>
+
+    <path d="M1672 483C1648 635 1567 780 1434 872"
+          fill="none" stroke="#8b0629" stroke-width="2"/>
+
+  </svg>
 
   <!-- ================= TOP BAR ================= -->
 
@@ -786,7 +997,6 @@ body {
     <div class="top-extra">
 
       <div class="social-links">
-
         <a href="#" aria-label="YouTube">
           <i class="fa-brands fa-youtube"></i>
         </a>
@@ -798,7 +1008,6 @@ body {
         <a href="#" aria-label="Facebook">
           <i class="fa-brands fa-facebook"></i>
         </a>
-
       </div>
 
       <span class="top-divider"></span>
@@ -832,7 +1041,7 @@ body {
 
       <div class="nav-school">
         <strong>M.E.S INDIAN SCHOOL</strong>
-        <span>Learn • Lead • Excel</span>
+        <span>Oh my Lord, Enhance my knowledge</span>
       </div>
 
     </div>
@@ -865,7 +1074,10 @@ body {
         <i class="fa-solid fa-magnifying-glass"></i>
       </a>
 
-      <a href="https://portal.mesqatar.org/" class="nav-login" target="_blank" rel="noopener noreferrer">
+      <a href="https://portal.mesqatar.org/"
+         class="nav-login"
+         target="_blank"
+         rel="noopener noreferrer">
         Login / Portal
         <i class="fa-solid fa-arrow-right"></i>
       </a>
@@ -873,6 +1085,48 @@ body {
     </div>
 
   </nav>
+
+  <!-- ================= HERO TEXT AREA ================= -->
+
+  <section class="hero-section">
+
+    <div class="hero-content">
+
+      <div class="hero-overline">
+        Welcome to
+      </div>
+
+      <h1>
+        M.E.S
+        <span>INDIAN SCHOOL</span>
+      </h1>
+
+      <div class="hero-tagline">
+        LEARN • LEAD • EXCEL
+      </div>
+
+      <p class="hero-description">
+        Inspiring young minds, nurturing talent and shaping tomorrow's
+        leaders through excellence in education.
+      </p>
+
+      <div class="hero-buttons">
+
+        <a href="#" class="hero-btn hero-btn-primary">
+          Explore Our School
+          <i class="fa-solid fa-arrow-right"></i>
+        </a>
+
+        <a href="#" class="hero-btn hero-btn-secondary">
+          <i class="fa-solid fa-circle-play"></i>
+          Watch Video
+        </a>
+
+      </div>
+
+    </div>
+
+  </section>
 
 </div>
 
