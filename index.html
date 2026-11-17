@@ -5,9 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>M.E.S INDIAN SCHOOL</title>
-
 <link rel="shortcut icon" href="assets/anniversary-logo.png" type="image/x-icon">
-
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
 <style>
@@ -27,6 +25,13 @@ html, body {
   width: 100%;
   min-height: 100%;
   margin: 0;
+  scroll-behavior: smooth;
+}
+
+html {
+  overflow-y: scroll !important;
+  scrollbar-width: none !important;
+  scrollbar-color: #f8c744 #02091b;
 }
 
 body {
@@ -34,6 +39,69 @@ body {
   overflow-y: auto;
   background: var(--navy);
   color: #fff;
+}
+
+/* ================= CUSTOM SCROLLBAR ================= */
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #02091b;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(
+    180deg,
+    #ffe16a,
+    #f8c744,
+    #b88619
+  );
+  border-radius: 10px;
+  border: 2px solid #02091b;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #ffe16a;
+}
+
+/* Show scrollbar after loading */
+
+html.page-loaded {
+    overflow-y: scroll;
+    scrollbar-width: thin;
+    scrollbar-color: #f8c744 #02091b;
+}
+
+html.page-loaded::-webkit-scrollbar {
+    display: block;
+    width: 10px;
+}
+
+html.page-loaded::-webkit-scrollbar-track {
+    background: #02091b;
+}
+
+html.page-loaded::-webkit-scrollbar-thumb {
+    background: linear-gradient(
+        180deg,
+        #ffe16a,
+        #f8c744,
+        #b88619
+    );
+    border-radius: 10px;
+    border: 2px solid #02091b;
+}
+
+html.page-loaded::-webkit-scrollbar-thumb:hover {
+    background: #ffe16a;
 }
 
 /* ================= LOADER ================= */
@@ -196,11 +264,11 @@ body {
   display: none;
   position: relative;
   isolation: isolate;
-  overflow: hidden;
+  overflow: visible;
   min-height: 100vh;
   width: 100%;
+  height: auto;
 
-  /* Background image controlled by script.js */
   background-color: #02091b;
 
   background-image:
@@ -240,7 +308,8 @@ body {
 
 .homepage-curves {
   position: absolute;
-  inset: 0;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   z-index: 0;
@@ -548,7 +617,7 @@ body {
   min-height: calc(100vh - 143px);
   display: flex;
   align-items: center;
-  padding: 30px 8.5% 85px;
+  padding: 30px 8.5% 120px;
 }
 
 .hero-content {
@@ -560,20 +629,20 @@ body {
   display: flex;
   align-items: center;
   gap: 13px;
-  color: var(--gold);
+  color: white;
   font-family: 'Montserrat', sans-serif;
   font-size: 13px;
   font-weight: 600;
-  letter-spacing: 4px;
+  letter-spacing: 14px;
   text-transform: uppercase;
   margin-bottom: 20px;
 }
 
-.hero-overline::before {
+.hero-overline::after {
   content: "";
-  width: 42px;
+  width: 80px;
   height: 2px;
-  background: var(--gold);
+  background: white;
 }
 
 .hero-content h1 {
@@ -636,14 +705,15 @@ body {
 }
 
 .hero-btn-primary {
-  color: #15101a;
-  background: linear-gradient(110deg, #ffe17b, #e6a928);
-  border: 1px solid #f8c744;
+  color: #ffffff;
+  background: linear-gradient(110deg, #a20b35, #65001e);
+  border: none;
+  box-shadow: 0 3px 12px rgba(255, 4, 80, 0.25);
 }
 
 .hero-btn-primary:hover {
   transform: translateY(-3px);
-  box-shadow: 0 8px 22px rgba(248,199,68,.25);
+  box-shadow: 0 8px 22px rgba(255, 4, 80, 0.25);
 }
 
 .hero-btn-secondary {
@@ -860,6 +930,93 @@ body {
   }
 }
 
+/* ================= FOUR-SECTION SCROLL NAVIGATION ================= */
+
+.section-dots {
+    position: fixed;
+    z-index: 50;
+    right: 2.2%;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 13px;
+    padding: 12px 9px;
+}
+
+.section-dots a {
+    position: relative;
+    display: block;
+    width: 12px;
+    height: 12px;
+    border: 2px solid rgba(255,255,255,.88);
+    border-radius: 50%;
+    background: rgba(2,9,27,.28);
+    box-shadow: 0 1px 8px rgba(0,0,0,.28);
+    transition: background .25s ease, border-color .25s ease,
+                transform .25s ease, box-shadow .25s ease;
+}
+
+.section-dots a:hover {
+    transform: scale(1.2);
+    border-color: var(--gold);
+}
+
+.section-dots a.active {
+    background: var(--gold);
+    border-color: var(--gold);
+    box-shadow: 0 0 0 4px rgba(248,199,68,.16),
+                0 0 12px rgba(248,199,68,.55);
+}
+
+.section-dots a::after {
+    content: attr(data-label);
+    position: absolute;
+    right: 23px;
+    top: 50%;
+    transform: translateY(-50%) translateX(5px);
+    padding: 6px 10px;
+    border: 1px solid rgba(255,255,255,.16);
+    border-radius: 5px;
+    background: rgba(2,9,27,.88);
+    color: #fff;
+    font: 500 10px 'Montserrat', sans-serif;
+    letter-spacing: .3px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .2s ease, transform .2s ease;
+}
+
+.section-dots a:hover::after,
+.section-dots a:focus-visible::after {
+    opacity: 1;
+    transform: translateY(-50%) translateX(0);
+}
+
+.section-dots a:focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 4px;
+}
+
+@media (max-width: 700px) {
+    .section-dots {
+        right: 8px;
+        gap: 11px;
+        padding: 10px 6px;
+    }
+
+    .section-dots a {
+        width: 10px;
+        height: 10px;
+    }
+
+    .section-dots a::after {
+        display: none;
+    }
+}
+
 </style>
 </head>
 
@@ -908,7 +1065,7 @@ body {
   <section class="center">
     <img class="emblem" src="assets/anniversary-logo.png" alt="50th anniversary emblem">
     <div class="school-name">M.E.S INDIAN SCHOOL</div>
-    <div class="motto">LEARN • LEAD • EXCEL</div>
+    <div class="motto">DOHA, QATAR</div>
   </section>
 
   <div class="loading">
@@ -924,6 +1081,21 @@ body {
 
 <div id="Home-Page">
 
+  <!-- FIXED FOUR-SECTION SCROLL NAVIGATION -->
+  <nav class="section-dots" aria-label="Homepage section navigation">
+    <a href="#section-home" class="active" data-section="section-home"
+       data-label="Home" aria-label="Go to Home" aria-current="location"></a>
+
+    <a href="#section-about" data-section="section-about"
+       data-label="About Us" aria-label="Go to About Us"></a>
+
+    <a href="#section-academics" data-section="section-academics"
+       data-label="Academics & Beyond" aria-label="Go to Academics and Beyond"></a>
+
+    <a href="#section-news" data-section="section-news"
+       data-label="News & Events" aria-label="Go to News and Events"></a>
+  </nav>
+
   <!-- RED DECORATIVE CORNER DESIGNS -->
 
   <svg class="homepage-curves"
@@ -938,8 +1110,6 @@ body {
       </linearGradient>
     </defs>
 
-    <!-- TOP LEFT CORNER -->
-
     <path d="M0 0H165L0 165Z" fill="url(#homeRed)"/>
 
     <path d="M0 0H225C145 49 70 111 0 246Z"
@@ -950,8 +1120,6 @@ body {
 
     <path d="M0 284C75 166 180 69 316 28C392 5 470 0 540 0"
           fill="none" stroke="#850020" stroke-width="2"/>
-
-    <!-- BOTTOM RIGHT CORNER -->
 
     <path d="M1672 632V941H1320C1474 893 1594 788 1672 632Z"
           fill="url(#homeRed)"/>
@@ -997,6 +1165,7 @@ body {
     <div class="top-extra">
 
       <div class="social-links">
+
         <a href="#" aria-label="YouTube">
           <i class="fa-brands fa-youtube"></i>
         </a>
@@ -1008,6 +1177,7 @@ body {
         <a href="#" aria-label="Facebook">
           <i class="fa-brands fa-facebook"></i>
         </a>
+
       </div>
 
       <span class="top-divider"></span>
@@ -1088,7 +1258,7 @@ body {
 
   <!-- ================= HERO TEXT AREA ================= -->
 
-  <section class="hero-section">
+  <section class="hero-section page-section" id="section-home">
 
     <div class="hero-content">
 
@@ -1131,6 +1301,75 @@ body {
 </div>
 
 <script src="script.js"></script>
+
+<script>
+/* ================= FOUR-SECTION SCROLL NAVIGATION ================= */
+
+(() => {
+    const dots = Array.from(document.querySelectorAll('.section-dots a'));
+
+    if (!dots.length) return;
+
+    const sections = dots
+        .map(dot => document.getElementById(dot.dataset.section))
+        .filter(Boolean);
+
+    function setActive(sectionId) {
+        dots.forEach(dot => {
+            const isActive = dot.dataset.section === sectionId;
+
+            dot.classList.toggle('active', isActive);
+
+            if (isActive) {
+                dot.setAttribute('aria-current', 'location');
+            } else {
+                dot.removeAttribute('aria-current');
+            }
+        });
+    }
+
+    dots.forEach(dot => {
+        dot.addEventListener('click', event => {
+            const target = document.getElementById(dot.dataset.section);
+
+            if (!target) {
+                event.preventDefault();
+                return;
+            }
+
+            event.preventDefault();
+
+            target.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+
+            setActive(target.id);
+        });
+    });
+
+    if ('IntersectionObserver' in window && sections.length) {
+        const observer = new IntersectionObserver(entries => {
+
+            const visible = entries
+                .filter(entry => entry.isIntersecting)
+                .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+
+            if (visible.length) {
+                setActive(visible[0].target.id);
+            }
+
+        }, {
+            root: null,
+            rootMargin: '-25% 0px -45% 0px',
+            threshold: [0, 0.1, 0.25, 0.5, 0.75]
+        });
+
+        sections.forEach(section => observer.observe(section));
+    }
+
+})();
+</script>
 
 </body>
 </html>

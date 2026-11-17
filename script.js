@@ -1,4 +1,10 @@
 
+/* ================= PAGE LOADER ================= */
+
+document.documentElement.style.overflowY = "scroll";
+document.body.style.overflowY = "auto";
+document.body.style.overflowX = "hidden";
+
 window.addEventListener("load", () => {
     const loader = document.querySelector(".loader");
     const progress = document.querySelector(".progress");
@@ -29,8 +35,17 @@ window.addEventListener("load", () => {
                     loader.style.display = "none";
 
                     homePage.style.display = "block";
+
+                    // Enable scrolling sand show scroll after laoding page
+                    document.documentElement.classList.add("page-loaded");
+
+                
+
+                    // Keep scrolling enabled
+                    document.documentElement.style.overflowY = "scroll";
                     document.body.style.overflowY = "auto";
                     document.body.style.overflowX = "hidden";
+
                     document.body.style.background = "#02091b";
 
                     requestAnimationFrame(() => {
@@ -58,17 +73,17 @@ let currentImage = 0;
 
 const homepage = document.getElementById("Home-Page");
 
-// Preload the slideshow images
+// Preload slideshow images
 backgroundImages.forEach(src => {
     const img = new Image();
     img.src = src;
 });
 
 function changeBackground() {
+    if (!homepage) return;
+
     currentImage = (currentImage + 1) % backgroundImages.length;
 
-    // Change ONLY the image variable.
-    // The navy gradient remains untouched.
     homepage.style.setProperty(
         "--hero-slide",
         `url("${backgroundImages[currentImage]}")`
